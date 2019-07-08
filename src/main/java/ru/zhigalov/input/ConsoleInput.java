@@ -21,8 +21,8 @@ public class ConsoleInput {
         // Запрашиваем ввод данных через консоль
         public HashSet<TestRow> getDataFromConsole(){
             HashSet<TestRow> temp = new HashSet<>();
-            System.out.println("Введите данные вручную в формате: start_page,user,ts,depth,duration,transmit,type"); //referer,
-            System.out.println("Для окончания ввода введите exit");
+            System.out.println("Enter data manually in the format: start_page,user,ts,depth,duration,transmit,type"); //referer,
+            System.out.println("To finish entered, enter 'exit'");
                 try {
                     while (true){
                         String str = consoleInput();
@@ -30,14 +30,14 @@ public class ConsoleInput {
                         String[] row = str.split(",");
                         if (row.length != 7){
                             //или if (row.length != 8){ если входящие данные будут с полем referer. см. TestRow
-                            System.out.println("Неверный формат данных! Введите корректные данные или завершите ввод командой exit");
+                            System.out.println("Invalid data format! Enter the correct data or complete the input with the command exit");
                             continue;
                         }
                         temp.add(new TestRow(row[0],row[1],row[2],row[3],row[4],row[5],row[6])); //,row[7]
-                        System.out.println("Строка добавлена. Наберите exit, или добавьте новую строку:");
+                        System.out.println("A string attached. Enter 'exit', or add a new line:");
                     }
                 }catch (IOException ioe){
-                    logger.warning("Ошибка при вводе строки с данными");
+                    logger.warning("Error entering data line");
                     ioe.printStackTrace();
                 }
             return temp;

@@ -24,10 +24,10 @@ public class CsvReadWrite {
                 temp.add(new TestRow(row[0],row[1],row[2],row[3],row[4],row[5],row[6])); //,row[7]
             }
         }catch (FileNotFoundException fnfe){
-            logger.warning("Файл не найден...");
+            logger.warning("File not found...");
             fnfe.printStackTrace();
         }catch (IOException ioe){
-            logger.warning("Ошибка при чтении из файла");
+            logger.warning("Error read file...");
             ioe.printStackTrace();
         }
         return temp;
@@ -45,6 +45,6 @@ public class CsvReadWrite {
         }catch (FileNotFoundException fnfe){
             fnfe.printStackTrace();
         }
-        System.out.println("Данные записаны в файл " + newFileName);
+        System.out.println("Data written to file " + newFileName);
     }
 }

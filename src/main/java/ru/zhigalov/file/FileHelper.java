@@ -34,8 +34,8 @@ public class FileHelper {
                 temp = AllXmlOperations.readDataFromXML(fileName);
                 break;
             default:
-                System.out.println("Неверный формат исходного файла. Запустите программу с верными параметрами!");
-                logger.warning("С таким форматом данных программа не работает :(");
+                System.out.println("The source file format is incorrect. Run the program with the correct parameters!");
+                logger.warning("The program does not work with this data format :(");
                 System.exit(2);
         }
         return temp;
@@ -44,16 +44,16 @@ public class FileHelper {
     // Запрашиваем имя файла
     private String askFileName(){
         String file = new String();
-        System.out.println("Введите корректный путь и имя файла:");
+        System.out.println("Enter a valid path and file name:");
         try {
             while (true){
                 file = ConsoleInput.consoleInput();
                 if (file.toLowerCase().equals("exit")) System.exit(2);
                 if (file.length()>4) break;
-                System.out.println("Слишком короткий путь файла. Попробуйте заново или наберите слово exit для выхода из программы");
+                System.out.println("The file path is too short. Try again or type exit to exit the program");
             }
         }catch (IOException ioe){
-            logger.warning("Ошибка считывания названия файла");
+            logger.warning("Error reading file name");
             ioe.printStackTrace();
         }
         return file;
@@ -72,7 +72,7 @@ public class FileHelper {
                 AllXmlOperations.writeToXML(finalData,column1,column2,agr,fileName);
                 break;
             default:
-                System.out.println("Неверный формат файла вывода. Запустите программу с верными параметрами!");
+                System.out.println("The output file format is incorrect. Run the program with the correct parameters!");
                 System.exit(2);
         }
     }

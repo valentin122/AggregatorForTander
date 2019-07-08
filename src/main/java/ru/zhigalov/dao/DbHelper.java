@@ -28,18 +28,18 @@ public class DbHelper {
     // Записываем данные в БД
     public void writeDataToDb(Map<String, String> finalData, String column1, String column2, String agr){
         try (Connection connection = DriverManager.getConnection(url, login, pw)){
-            logger.info("Открыто соединение с БД");
+            logger.info("Connected to DB");
             Statement stat=connection.createStatement();
             stat.executeUpdate("CREATE TABLE F1_Result ("+column1+" VARCHAR(20), "+agr+"_"+column2+" VARCHAR(20))");
-            logger.info("Создали таблицу");
+            logger.info("Create table");
             for (Map.Entry<String,String> entry:finalData.entrySet()
                     ) {
                 stat.executeUpdate("INSERT INTO F1_Result VALUES ("+entry.getKey()+","+entry.getValue()+")");
             }
-            logger.info("Данные внесены в таблицу");
-            System.out.println("Данные записаны в вашу БД");
+            logger.info("Data written to DB");
+            System.out.println("Data written to DB");
         }catch (SQLException sqle){
-            logger.warning("Ошибка при работе с БД");
+            logger.warning("Error while working with DB");
             sqle.printStackTrace();
         }
     }
@@ -48,18 +48,18 @@ public class DbHelper {
     public Connection getProperties() throws SQLException
     {
         Properties props=new Properties();
-        System.out.println("Введите путь к файлу-конфигу JDBC:");
+        System.out.println("Please enter path to config file JDBC:");
         String fileNameProps = "";
         try {
             fileNameProps = ConsoleInput.consoleInput();
         }catch (IOException ioe){
-            logger.warning("Ошибка считывания названия файла");
+            logger.warning("Error read file");
             ioe.printStackTrace();
         }
         try(FileInputStream in=new FileInputStream(fileNameProps)){
             props.load(in);
         }catch (IOException ioe){
-            logger.warning("Ошибка загрузки из файла Properties");
+            logger.warning("Error loading file Properties");
             ioe.printStackTrace();
         }
         String drivers = props.getProperty("jdbc.drivers");
@@ -67,7 +67,7 @@ public class DbHelper {
         url = props.getProperty("jdbc.url");
         login=props.getProperty("jdbc.username");
         pw=props.getProperty("jdbc.password");
-        logger.info("Properties БД загружены");
+        logger.info("Properties DB loaded");
         return DriverManager.getConnection(url, login, pw);
     }
 }

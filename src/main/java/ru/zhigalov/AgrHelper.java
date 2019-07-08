@@ -29,13 +29,13 @@ public class AgrHelper {
     public Map<String, String> getAvg(HashSet<TestRow> data, String column1, String column2){
         Map<String,String> temp = new HashMap<>();
         // Запускаем потоки
-        logger.info("Запускаем поток получения сумм");
+        logger.info("Run thread SUM");
         ThreadGetSum threadGetSum = new ThreadGetSum();
         threadGetSum.setData(data);
         threadGetSum.setColumn1(column1);
         threadGetSum.setColumn2(column2);
         threadGetSum.start();
-        logger.info("Запускаем поток получения количества");
+        logger.info("Run thread to get the number of");
         ThreadGetCount threadGetCount = new ThreadGetCount();
         threadGetCount.setData(data);
         threadGetCount.setColumn1(column1);
@@ -43,18 +43,18 @@ public class AgrHelper {
         // Ждем их завершения
         try{
             threadGetSum.join();
-            logger.info("Поток суммы завершен");
+            logger.info("Thread SUM completed");
         }catch (InterruptedException ie){
             ie.printStackTrace();
-            logger.warning("Что-то не так с потоком получения суммы");
+            logger.warning("Something wrong in thread SUM");
         }
         Map<String,String> dataSum = threadGetSum.getDataSum();
         try{
             threadGetCount.join();
-            logger.info("Поток количества завершен");
+            logger.info("'Thread to get the number of' complete");
         }catch (InterruptedException ie){
             ie.printStackTrace();
-            logger.warning("Что-то не так с потоком получения количества");
+            logger.warning("Something wrong in 'thread to get the number of'");
         }
         Map<String,String> dataCount = threadGetCount.getDataCount();
         // Считаем
